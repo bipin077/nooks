@@ -1,34 +1,25 @@
-import React from 'react'
+import React from 'react';
+import {useGetAllWhyChooseUsQuery} from "../store/Services/WhyChooseUsService";
 
 const BookConsultation = () => {
+
+    const {data=[], isFetching} = useGetAllWhyChooseUsQuery();
+
     return (
         <section className="book-consultation">
             <div className="container">
                 <div className="row">
-                    <div className="col-xl-4 col-md-6 d-flex">
-                        <div className="consult-box d-flex align-items-center">
-                            <div className="consult-img mr-15">
-                                <img src="/img/icons/book-01.svg" alt="" />
-                            </div>
-                            <p>Book any Doctor you want</p>
-                        </div>
-                    </div>
-                    <div className="col-xl-4 col-md-6 d-flex">
-                        <div className="consult-box d-flex align-items-center">
-                            <div className="consult-img mr-15">
-                                <img src="/img/icons/book-02.svg" alt="" />
-                            </div>
-                            <p>Book Virtual Appointment</p>
-                        </div>
-                    </div>
-                    <div className="col-xl-4 col-md-6 d-flex">
-                        <div className="consult-box d-flex align-items-center">
-                            <div className="consult-img mr-15">
-                                <img src="/img/icons/book-03.svg" alt="" />
-                            </div>
-                            <p>Book virtual Appointments with AYUSH doctors</p>
-                        </div>
-                    </div>
+                    { !isFetching && data.whychooseus.map((whychoose)=>
+                        whychoose.status ? 
+                            <div className="col-xl-4 col-md-6 d-flex">
+                                <div className="consult-box d-flex align-items-center">
+                                    <div className="consult-img mr-15">
+                                        <img src={ `/upload/whychooseus/${whychoose.image}`} alt="" />
+                                    </div>
+                                    <p>{whychoose.title}</p>
+                                </div>
+                            </div> : ''
+                        )}
                 </div>
             </div>
         </section>

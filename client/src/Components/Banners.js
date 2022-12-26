@@ -17,6 +17,7 @@ const Banners = () => {
                     <div className="banner-slider-one pagination-square align-pagination-square">
                         <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
                             { !isFetching && data.banners.map((banner) =>
+                                banner.status ? 
                                 <SwiperSlide key={banner._id}>
                                     <div className="banner-slider-single banner-animation-col">
                                         <div className="row align-items-center">
@@ -33,7 +34,7 @@ const Banners = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </SwiperSlide>
+                                </SwiperSlide> : ""
                             )}
                         </Swiper>
                     </div>

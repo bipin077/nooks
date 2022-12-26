@@ -7,8 +7,7 @@ import "swiper/css/pagination";
 
 import { useGetAllCategoriesQuery } from '../store/Services/CategoryService';
 
-// import required modules
-import { Pagination } from "swiper";
+import {Link} from "react-router-dom";
 
 const PopularCategories = () => {
 
@@ -33,20 +32,21 @@ const PopularCategories = () => {
                                 <Swiper slidesPerView={6} spaceBetween={10} className="mySwiper"
                                 >
                                     { !isFetching && data.category.map((category) =>
+                                        category.status ? 
                                         <SwiperSlide  key={category._id}>
                                             <div className="category-grid wow animate__animated animate__fadeIn" data-wow-delay=".1s">
                                                 <div className="category-img-col">
                                                     <div className="category-img category-img-zoom">
-                                                        <a href="view-product.html">
+                                                        <Link to={ `/shop/${category._id}` }>
                                                         <img src={ `/upload/category/${category.image}`} alt="" />
-                                                        </a>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                                 <div className="category-content">
-                                                    <h4><a href="view-product.html">{category.title}</a></h4>
+                                                    <h4><Link to={ `/shop/${category._id}` }>{category.title}</Link></h4>
                                                 </div>
                                             </div>
-                                        </SwiperSlide>
+                                        </SwiperSlide> : ""
                                     )}
                                 </Swiper>
                             </div>

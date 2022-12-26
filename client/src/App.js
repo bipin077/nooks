@@ -25,6 +25,8 @@ import Shop from './Screens/Shop';
 import AllWhyChooseUs from './Screens/Admin/AllWhyChooseUs';
 import AddWhyChooseUs from './Screens/Admin/AddWhyChooseUs';
 import EditWhyChooseUs from './Screens/Admin/EditWhyChooseUs';
+import ProductDetail from './Screens/ProductDetail';
+import ShopCategory from './Screens/ShopCategory';
 
 
 const App = () => {
@@ -33,6 +35,8 @@ const App = () => {
         <Routes>
           <Route path='/' element={<HomeScreen />} />
           <Route path='/shop' element={<Shop />} />
+          <Route path='/shop/:id' element={<ShopCategory />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
 
           <Route path='/admin'>
               <Route path='dashboard' element={<Dashboard />} />

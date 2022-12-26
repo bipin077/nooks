@@ -24,9 +24,6 @@ const Wrapper = ({ children }) => {
                 <Link className="nav-link text-light" to="/admin/categories"><i class="fas fa-shopping-bag mr-10"></i> Manage Category</Link>
               </li>
               <li className="nav-item p-1 bg-success mt-1">
-                <Link className="nav-link text-light" to="/admin/categories"><i class="fas fa-shopping-bag mr-10"></i> Manage Subcategory</Link>
-              </li>
-              <li className="nav-item p-1 bg-success mt-1">
                 <Link className="nav-link text-light" to="/admin/products"><i class="fas fa-shopping-cart mr-10"></i> Manage Products</Link>
               </li>
               <li className="nav-item p-1 bg-success mt-1">
