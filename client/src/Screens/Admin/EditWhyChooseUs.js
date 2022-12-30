@@ -62,7 +62,7 @@ const EditWhyChooseUs = () => {
 
     return (
         <Wrapper>
-            <div class="container mt-3">
+            <div className="container mt-3">
                 <h2>Edit Why Choose Us</h2>
                 <Link to="/admin/whychooseus"><button className='m-2 px-2 bg-success text-light'>All Why Choose Us</button></Link>
                 <form onSubmit={formSubmitHandler}>
@@ -85,9 +85,9 @@ const EditWhyChooseUs = () => {
                         <label htmlFor="pwd" className="form-label">Image</label>
                         <input type="file" className="form-control form-control-sm" name="image" onChange={(e)=>setImage(e.target.files[0])} />
                         <p>Image dimention must be 60 × 61 px and jpg format</p>
-                        { data.whychooseus ? <img src={ `/upload/whychooseus/${data.whychooseus.image}` } style={{"width" : "10%"}} class="rounded-pill"  /> : '' }
+                        { data.whychooseus ? <img src={ `/upload/whychooseus/${data.whychooseus.image}` } style={{"width" : "10%"}} className="rounded-pill"  /> : '' }
                     </div>
-                    <button type="submit" class="btn btn-success">Click Here To Submit</button>
+                    <button type="submit" className="btn btn-success">Click Here To Submit</button>
                 </form>
             </div>
         </Wrapper>

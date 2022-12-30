@@ -1,20 +1,80 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ClientWrapper from './ClientWrapper';
-
-import { useParams } from 'react-router-dom';
-
+import {Helmet} from "react-helmet";
+import { useParams, useLocation } from 'react-router-dom';
+import {useDispatch} from "react-redux";
 import { useGetSingleProductQuery } from "../store/Services/ProductServices";
+import { addToCart } from '../store/Reducers/CartReducer';
+var HTMLDecoder = require("html-decoder");
 
 
 const ProductDetail = () => {
 
+    //const [quantity, setQuantity] = useState(1);
+
+    const dispatch = useDispatch();
+
     const { id } = useParams();
+    
+
+    const [productData, setProductData] = useState({
+        id : '',
+        category : '',
+        name : '',
+        image : '',
+        mrp: '',
+        price : '',
+        sku : '',
+        quantity : 1
+    });
+
+    
+    const incrementQuantity = () =>
+    {
+        setProductData({ ...productData, quantity : productData.quantity + 1 });
+    }
+
+    const decrementQuantity = () =>
+    {
+        if(productData.quantity>1)
+        {
+            setProductData({ ...productData, quantity : productData.quantity - 1 });  
+        }
+        else
+        {
+            setProductData({ ...productData, quantity : 1 });
+        }
+    }
+
 
     const { data = [], isFetching } = useGetSingleProductQuery(id);
     console.log(data);
 
+
+    const addToCartProduct = () =>
+    {
+        // setProductData({...productData, quantity : quantity});
+        dispatch(addToCart(productData));
+        alert("Product Added To Cart");
+    }
+
+    useEffect(() =>{
+
+        if(!isFetching)
+        {
+            
+            setProductData({...productData, id : data.product._id, category : data.product.category, name : data.product.name, image : data.product.image, mrp : data.product.mrp, price : data.product.price, sku : data.product.sku});
+        }
+    },[data.msg])
+
+      useScrollToTop();
+
     return (
         <ClientWrapper>
+            <Helmet>
+                <meta charSet="utf-8" />
+                {!isFetching ? <title>{data.product.name} | Nooks</title> : "" }
+            </Helmet>
 
             {!isFetching ? <>
                 <div className="breadcrumb-group">
@@ -73,14 +133,13 @@ const ProductDetail = () => {
                                                         <div className="quntity-group  d-flex">
                                                             <div className="detail-extralink">
                                                                 <div className="detail-qty border radius">
-                                                                    <a href="#" className="qty-down"><i
-                                                                        className="fi-rs-minus-small"></i></a>
-                                                                    <span className="qty-val">1</span>
-                                                                    <a href="#" className="qty-up"><i className="fi-rs-plus-small"></i></a>
+                                                                    <a onClick={decrementQuantity} className="qty-down"><i className="fi-rs-minus-small"></i></a>
+                                                                    <span className="qty-val">{productData.quantity}</span>
+                                                                    <a onClick={incrementQuantity} className="qty-up"><i className="fi-rs-plus-small"></i></a>
                                                                 </div>
                                                             </div>
-                                                            <a href="cart.html" className="button button-add-to-cart me-3"><i
-                                                                className="fi-rs-shopping-cart"></i> Add to cart</a>
+                                                            <button className="button button-add-to-cart me-3" onClick={addToCartProduct}><i
+                                                                className="fi-rs-shopping-cart"></i> Add to cart</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -114,5 +173,15 @@ const ProductDetail = () => {
         </ClientWrapper>
     )
 }
+
+
+const useScrollToTop = () => {
+    const location = useLocation();
+    useEffect(() => {
+      window.scrollTo({ top: 0 });
+     // scroll to the top of the browser window when changing route
+     // the window object is a normal DOM object and is safe to use in React.
+    }, [location]);
+  };
 
 export default ProductDetail;

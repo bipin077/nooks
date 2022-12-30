@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Wrapper from './Wrapper';
 
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
 import { useGetAllCategoriesQuery } from '../../store/Services/CategoryService';
 import { useGetSingleProductQuery, useUpdateProductMutation } from "../../store/Services/ProductServices";
 
@@ -17,6 +20,8 @@ const EditProduct = () => {
     const [updateProduct, response] = useUpdateProductMutation();
     console.log(response);
 
+    const [description, setDescription] = useState('');
+    const [specification, setSpecification] = useState('');
 
     const [image, setImage] = useState("");
     const [state, setState] = useState({
@@ -25,8 +30,6 @@ const EditProduct = () => {
         mrp : 0,
         price : 0,
         sku : "",
-        description : "",
-        specification : "",
         is_trending : false,
         is_featured : false,
         position : 0,
@@ -37,8 +40,10 @@ const EditProduct = () => {
     {
         if(productData.msg == 'success')
         {
-            setState({category : productData.product.category, name : productData.product.name, mrp : productData.product.mrp, price : productData.product.price, sku : productData.product.sku, description : productData.product.description, specification :  productData.product.specification, is_trending :  productData.product.is_trending, is_featured : productData.product.is_featured, position : productData.product.position, status : productData.product.status});
+            setState({category : productData.product.category, name : productData.product.name, mrp : productData.product.mrp, price : productData.product.price, sku : productData.product.sku, is_trending :  productData.product.is_trending, is_featured : productData.product.is_featured, position : productData.product.position, status : productData.product.status});
             setImage(productData.product.image);
+            setDescription(productData.product.description);
+            setSpecification(productData.product.specification);
         }
     },[productData.msg])
 
@@ -57,8 +62,8 @@ const EditProduct = () => {
         fd.append("mrp", state.mrp);
         fd.append("price", state.price);
         fd.append("sku", state.sku);
-        fd.append("description", state.description);
-        fd.append("specification", state.specification);
+        fd.append("description", description);
+        fd.append("specification", specification);
         fd.append("is_trending", state.is_trending);
         fd.append("is_featured", state.is_featured);
         fd.append("position", state.position);
@@ -110,13 +115,12 @@ const EditProduct = () => {
                         </div>
                     </div>
                     <div className="mb-3 mt-3">
-                        <label htmlFor="email" className="form-label">Enter Description</label>
-                        <textarea name="description" className="form-control form-control-sm" row="3" onChange={inputHandler} value={state.description}></textarea>
-                    </div>
-
-                    <div className="mb-3 mt-3">
                         <label htmlFor="email" className="form-label">Enter Specification</label>
-                        <textarea name="specification" className="form-control form-control-sm" row="3" onChange={inputHandler} value={state.specification}></textarea>
+                        <ReactQuill theme="snow" placeholder='Enter Specification' value={specification} onChange={setSpecification} />
+                    </div>
+                    <div className="mb-3 mt-3">
+                        <label htmlFor="email" className="form-label">Enter Description</label>
+                        <ReactQuill theme="snow" placeholder='Enter Description' value={description} onChange={setDescription} />
                     </div>
                     <div className='row'>
                         <div className='col-sm-6'>
@@ -166,7 +170,7 @@ const EditProduct = () => {
                         <label htmlFor="pwd" className="form-label">Product Image</label>
                         <input type="file" className="form-control form-control-sm" name="image"  onChange={(e)=>setImage(e.target.files[0])} />
                         <p>Image dimention must be 292 × 284 px and jpg format</p>
-                        { productData.product ? <img src={ `/upload/products/${productData.product.image}` } style={{"width" : "10%"}} class="rounded-pill"  /> : '' }
+                        { productData.product ? <img src={ `/upload/products/${productData.product.image}` } style={{"width" : "10%"}} className="rounded-pill"  /> : '' }
                     </div>
                     <button type="submit" className="btn btn-success">Click Here To Submit</button>
                 </form>

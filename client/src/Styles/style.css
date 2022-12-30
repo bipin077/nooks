@@ -1168,7 +1168,6 @@ input {
   border-radius: 7px;
   height: 50px;
   box-shadow: none;
-  padding-left: 20px;
   font-size: 16px;
   width: 100%;
 }
@@ -1449,10 +1448,7 @@ label {
   transform: translateY(-80%) rotate(-45deg);
 }
 
-.custome-radio .form-check-input,
-.custome-checkbox .form-check-input {
-  display: none;
-}
+
 
 .login_footer {
   margin-bottom: 20px;
@@ -5726,9 +5722,6 @@ table.no-border td, table.no-border th, table.no-border thead {
 }
 .payment_option .custome-radio .form-check-label:before {
   content: "";
-  background: #c4c4c4;
-  height: 25px;
-  width: 25px;
   display: inline-block;
   border-radius: 100%;
   vertical-align: middle;
@@ -5805,10 +5798,6 @@ table.no-border td, table.no-border th, table.no-border thead {
   }
 }
 
-.custome-radio input[type=radio]:checked + .form-check-label::after {
-  opacity: 1;
-  background-color: #FFF;
-}
 
 .custome-radio input[type=radio]:checked + .form-check-label::before {
   opacity: 1;
@@ -6818,11 +6807,8 @@ table.no-border td, table.no-border th, table.no-border thead {
 
 .sidebar-layout {
   background-color: #FFF;
-  max-width: 500px;
+  max-width: 600px;
   width: 100%;
-  position: absolute;
-  right: 0;
-  height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
 }

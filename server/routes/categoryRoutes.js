@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require('multer');
 const path = require("path");
-const {geSingleCategory, getAllCategories, addCategory, updateCategory, deleteCategory} = require("../controller/CategoryController");
+const {getAllCategoryCount, geSingleCategory, getAllCategories, addCategory, updateCategory, deleteCategory} = require("../controller/CategoryController");
 
 
 const route = express.Router();
@@ -20,6 +20,9 @@ var upload = multer({ storage: storage })
 
 route.get("/categories/:id", geSingleCategory);
 route.get("/categories", getAllCategories);
+route.get("/categoriesCount", getAllCategoryCount);
+
+
 route.post("/categories", upload.single('image'), addCategory);
 route.put("/categories/:id", upload.single('image'), updateCategory);
 route.delete("/categories/:id", deleteCategory);

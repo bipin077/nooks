@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require('multer');
 const path = require("path");
-const {getAllBanners, getSingleBanner, addBanner, editBanner, deleteBanner} = require("../controller/BannerController");
+const {getAllBanners, getSingleBanner, addBanner, editBanner, deleteBanner, getAllBannersCount} = require("../controller/BannerController");
 
 const router = express.Router();
 
@@ -19,6 +19,7 @@ var upload = multer({ storage: storage })
 
 
 router.get("/banners", getAllBanners);
+router.get("/bannersCount", getAllBannersCount);
 router.get("/banners/:id", getSingleBanner);
 router.post("/banners", upload.single('image'), addBanner);
 router.put("/banners/:id", upload.single('image'), editBanner);

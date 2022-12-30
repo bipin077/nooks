@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Wrapper from './Wrapper';
 
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
 import { useGetAllCategoriesQuery } from '../../store/Services/CategoryService';
 import {useInsertProductMutation} from "../../store/Services/ProductServices";
 
@@ -13,6 +16,9 @@ const AddProduct = () => {
     const [insertProduct, response] = useInsertProductMutation();
     console.log(response);
 
+    const [description, setDescription] = useState('');
+    const [specification, setSpecification] = useState('');
+
     const [image, setImage] = useState("");
     const [state, setState] = useState({
         category : "",
@@ -20,8 +26,6 @@ const AddProduct = () => {
         mrp : 0,
         price : 0,
         sku : "",
-        description : "",
-        specification : "",
         is_trending : false,
         is_featured : false,
         position : 0,
@@ -43,8 +47,8 @@ const AddProduct = () => {
         fd.append("mrp", state.mrp);
         fd.append("price", state.price);
         fd.append("sku", state.sku);
-        fd.append("description", state.description);
-        fd.append("specification", state.specification);
+        fd.append("description", description);
+        fd.append("specification", specification);
         fd.append("is_trending", state.is_trending);
         fd.append("is_featured", state.is_featured);
         fd.append("position", state.position);
@@ -97,13 +101,12 @@ const AddProduct = () => {
                         </div>
                     </div>
                     <div className="mb-3 mt-3">
-                        <label htmlFor="email" className="form-label">Enter Description</label>
-                        <textarea name="description" className="form-control form-control-sm" row="3" onChange={inputHandler} value={state.description}></textarea>
-                    </div>
-
-                    <div className="mb-3 mt-3">
                         <label htmlFor="email" className="form-label">Enter Specification</label>
-                        <textarea name="specification" className="form-control form-control-sm" row="3" onChange={inputHandler} value={state.specification}></textarea>
+                        <ReactQuill theme="snow" placeholder='Enter Specification' value={specification} onChange={setSpecification} />
+                    </div>
+                    <div className="mb-3 mt-3">
+                        <label htmlFor="email" className="form-label">Enter Description</label>
+                        <ReactQuill theme="snow" placeholder='Enter Description' value={description} onChange={setDescription} />
                     </div>
                     <div className='row'>
                         <div className='col-sm-6'>

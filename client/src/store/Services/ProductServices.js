@@ -59,10 +59,40 @@ const ProductServices = createApi({
                     }
                 },
                 invalidatesTags : ['products']
+            }),
+            getProductByCategory : builder.query({
+                query : (id) =>
+                {
+                    return {
+                        method : "GET",
+                        url : `productsByCategory/${id}`
+                    }
+                }, 
+                providesTags : ['products']
+            }),
+            searchProduct : builder.query({
+                query : (query) =>
+                {
+                    return {
+                        method : "GET",
+                        url : `searchProducts/${query}`
+                    }
+                }, 
+                providesTags : ['products']
+            }),
+            countProducts : builder.query({
+                query : () =>
+                {
+                    return {
+                        url : "countProducts",
+                        method : "GET"
+                    }
+                },
+                providesTags : ['products']
             })
         }
     }
 });
 
-export const {useGetAllProductsQuery, useInsertProductMutation, useDeleteProductMutation, useGetSingleProductQuery, useUpdateProductMutation} = ProductServices;
+export const { useCountProductsQuery, useSearchProductQuery, useGetProductByCategoryQuery,useGetAllProductsQuery, useInsertProductMutation, useDeleteProductMutation, useGetSingleProductQuery, useUpdateProductMutation} = ProductServices;
 export default ProductServices;

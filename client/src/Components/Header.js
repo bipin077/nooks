@@ -5,19 +5,20 @@ import {Link, useNavigate} from "react-router-dom";
 
 import {useGetAllCategoriesQuery} from "../store/Services/CategoryService";
 
+import { useSelector } from 'react-redux';
+
 const Header = () => {
 
     const navigate = useNavigate();
     const {data=[], isFetching} = useGetAllCategoriesQuery();
 
-    const [query, setQuery] = useState("");
+    const [search, setSearch] = useState("");
 
- 
+    const cartData = useSelector(state => state.CartReducer);
 
-    const searchQuery = (e) =>
+    const searchQueryData = (e) =>
     {
-        e.preventdefault();
-        navigate("/shop");
+        navigate("/search/"+search);        
     }
 
     return (
@@ -42,7 +43,7 @@ const Header = () => {
                             <div className="col-xl-4 col-lg-6">
                                 <div className="header-left">
                                     <ul>
-                                        <li><Link className="popup-toggle"><i className="feather-user"></i>Login / Register</Link></li>
+                                        <li><i className="feather-user"></i><Link to="/login" className="popup-toggle">Login</Link> / <Link to="/register" className="popup-toggle">Register</Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -57,9 +58,9 @@ const Header = () => {
                             </div>
                             <div className="header-right">
                                 <div className="header-search">
-                                    <form onSubmit={searchQuery}>
-                                        <input type="text" placeholder="Search for medicines, health products and more" onChange={(e)=>setQuery(e.target.value)}/>
-                                        <input type="submit" name="search" className="submit-btn popup-toggle3" />
+                                    <form onSubmit={searchQueryData}>
+                                        <input type="text" placeholder="Search for medicines, health products and more" value={search} onChange={(e)=>setSearch(e.target.value)} />
+                                        <input type="submit" className="submit-btn popup-toggle3" />
                                     </form>
                                 </div>
                                 <div className="header-details">
@@ -72,104 +73,44 @@ const Header = () => {
                                         <div className="header-inner-icon ">
                                             <Link className="small-cart-icon" to="">
                                                 <i className="feather-heart"></i>
-                                                <span className="pro-count blue">0</span>
+                                                <span className="pro-count blue">{cartData.totalItems}</span>
                                             </Link>
-                                            <div className="cart-dropdown-wrap">
-                                                <ul>
-                                                    <li>
-                                                        <div className="shopping-cart-img">
-                                                            <Link to="/"><img src="/img/shop/cart-img-02.jpg" alt="" /></Link>
-                                                        </div>
-                                                        <div className="shopping-cart-title">
-                                                            <h4><Link to="/">Liver Detox Pills </Link></h4>
-                                                            <h4>(x 10)</h4>
-                                                        </div>
-                                                        <div className="shopping-cart-value">
-                                                            <h2>$15.00</h2>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div className="shopping-cart-img">
-                                                            <Link to="/"><img src="/img/shop/cart-img-03.jpg" alt="" /></Link>
-                                                        </div>
-                                                        <div className="shopping-cart-title">
-                                                            <h4><Link to="/">Heat Meter </Link></h4>
-                                                            <h4>(x 10)</h4>
-                                                        </div>
-                                                        <div className="shopping-cart-value">
-                                                            <h2>$18.00</h2>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <div className="shopping-cart-footer">
-                                                    <div className="shopping-cart-total">
-                                                        <h4>Total <span>$3000.00</span></h4>
-                                                    </div>
-                                                    <div className="shopping-cart-btn">
-                                                        <Link to="/cart" className="outline">View cart</Link>
-                                                        <Link to="/checkout">Checkout</Link>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div className="header-inner-icon ">
-                                            <Link className="small-cart-icon me-3" to="">
-                                                <i className="feather-shopping-bag"></i>
-                                                <span className="pro-count blue">1</span>
-                                            </Link>
+                                            
                                             <Link to="/cart" className="me-3">
                                                 <span className="lable d-block mt-0">Cart</span>
-                                                <span className="cart-amout d-block ">$0.00</span>
+                                                <span className="cart-amout d-block ">${cartData.totalPrice}</span>
                                             </Link>
+                                            { cartData.cart.length > 0 ?
                                             <div className="cart-dropdown-wrap">
                                                 <ul>
-                                                    <li>
-                                                        <div className="shopping-cart-img">
-                                                            <Link to="/"><img src="/img/shop/cart-img-01.jpg" alt="" /></Link>
-                                                        </div>
-                                                        <div className="shopping-cart-title">
-                                                            <h4><Link to="/">Antiseptic Spray</Link></h4>
-                                                            <h4>(x 10)</h4>
-                                                        </div>
-                                                        <div className="shopping-cart-value">
-                                                            <h2>$32.00</h2>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div className="shopping-cart-img">
-                                                            <Link to="/"><img src="/img/shop/cart-img-02.jpg" alt="" /></Link>
-                                                        </div>
-                                                        <div className="shopping-cart-title">
-                                                            <h4><Link to="/">Liver Detox Pills </Link></h4>
-                                                            <h4>(x 10)</h4>
-                                                        </div>
-                                                        <div className="shopping-cart-value">
-                                                            <h2>$32.00</h2>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div className="shopping-cart-img">
-                                                            <Link to="/"><img src="/img/shop/cart-img-03.jpg" alt="" /></Link>
-                                                        </div>
-                                                        <div className="shopping-cart-title">
-                                                            <h4><Link to="/">Heat Meter </Link></h4>
-                                                            <h4>(x 10)</h4>
-                                                        </div>
-                                                        <div className="shopping-cart-value">
-                                                            <h2>$32.00</h2>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                                { cartData.cart.map((item)=>
+                                                        <li>
+                                                            <div className="shopping-cart-img">
+                                                                <Link to="/"><img src={ `/upload/products/${item.image}` } alt="" style={{ "width" : "50px", "height" : "50px" }} /></Link>
+                                                            </div>
+                                                            <div className="shopping-cart-title">
+                                                                <h4><Link to="/">{item.name}</Link></h4>
+                                                                <h4>(x {item.quantity})</h4>
+                                                            </div>
+                                                            <div className="shopping-cart-value">
+                                                                <h2>${item.price}</h2>
+                                                            </div>
+                                                        </li>
+                                                    )}
+                                                </ul> 
                                                 <div className="shopping-cart-footer">
                                                     <div className="shopping-cart-total">
-                                                        <h4>Total <span>$4000.00</span></h4>
+                                                        <h4>Total <span>${cartData.totalPrice}</span></h4>
                                                     </div>
                                                     <div className="shopping-cart-btn">
-                                                        <Link to="/cart" className="outline">View cart</Link>
-                                                        <Link to="/checkout">Checkout</Link>
+                                                        
+                                                        <Link to="/cart">Go To Cart</Link>
                                                     </div>
-                                                </div>
+                                                </div> 
                                             </div>
+                                            : "" }
                                         </div>
                                     </div>
                                 </div>

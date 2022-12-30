@@ -1,4 +1,5 @@
 const Product = require("../model/Product");
+const Category = require("../model/Category");
 
 module.exports.getSingleProduct = async (req, res) =>
 {
@@ -64,5 +65,49 @@ module.exports.deleteProduct = async (req, res) =>
         return res.status(200).json({msg : "Product Deleted Successfully"});
     } catch (error) {
         return res.status(500).json({error : "Internal server error"});
+    }
+}
+
+module.exports.getProductByCategory = async (req, res) =>
+{
+    const id = req.params.id;
+    try {
+        const category = await Category.findOne({_id : id});
+        if(category)
+        {
+            const categoryName = category.title;
+            const product = await Product.find({category: categoryName});
+            return res.status(200).json({msg : "success", product});
+        }   
+        else{
+            return res.status(404).json({error : "Category not found"});
+        } 
+    } 
+    catch (error) {
+        return res.status(500).json({error : "Internal server error"});
+    }
+}
+
+module.exports.searchProduct = async (req, res) =>
+{
+    const query = req.params.query;
+
+    try {
+        const product = await Product.find({ "name" : {$regex : query} }); 
+        return res.status(200).json({msg : "success", product});
+    } 
+    catch (error) {
+        return res.status(500).json({error : "Internal server error"});
+    }
+}
+
+module.exports.getAllProductsCount = async (req, res) =>
+{
+    try {
+        const count = await Product.find({}).countDocuments();
+        return res.status(200).json({msg : "success", count});   
+    } 
+    catch (error) {
+        return res.status(500).json({error : "Technical error."});
     }
 }

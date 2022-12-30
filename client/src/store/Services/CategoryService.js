@@ -60,10 +60,20 @@ const CategoryService = createApi({
                     }
                 },
                 invalidatesTags : ["categories"]
+            }),
+            countCategory : builder.query({
+                query : () =>
+                {
+                    return {
+                        url : "categoriesCount",
+                        method : "GET"
+                    }
+                },
+                providesTags : ['categories']
             })
         }
     }
 });
 
-export const {useGetAllCategoriesQuery, useAddCategoryMutation, useDeleteCategoryMutation, useGetSingleCategoryQuery, useUpdateCategoryMutation} = CategoryService;
+export const {useCountCategoryQuery, useGetAllCategoriesQuery, useAddCategoryMutation, useDeleteCategoryMutation, useGetSingleCategoryQuery, useUpdateCategoryMutation} = CategoryService;
 export default CategoryService;

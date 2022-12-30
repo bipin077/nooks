@@ -70,3 +70,14 @@ module.exports.deleteCategory = async (req, res) =>
         return res.status(500).json({error : "Internal server error"});
     }
 }
+
+module.exports.getAllCategoryCount = async (req, res) =>
+{
+    try {
+        const count = await Category.find({}).countDocuments();
+        return res.status(200).json({msg : "success", count});   
+    } 
+    catch (error) {
+        return res.status(500).json({error : "Technical error."});
+    }
+}

@@ -48,7 +48,7 @@ const AddCategory = () => {
 
     return (
         <Wrapper>
-            <div class="container mt-3">
+            <div className="container mt-3">
                 <h2>Add New Category</h2>
                 <Link to="/admin/categories"><button className='m-2 px-2 bg-success text-light'>All Categories</button></Link>
                 <form onSubmit={formSubmitHandler}>
@@ -72,7 +72,7 @@ const AddCategory = () => {
                         <input type="file" className="form-control form-control-sm" name="image" onChange={(e)=>setImage(e.target.files[0])} />
                         <p>Image dimention must be 163 × 163 px and jpg format</p>
                     </div>
-                    <button type="submit" class="btn btn-success">Click Here To Submit</button>
+                    <button type="submit" className="btn btn-success">Click Here To Submit</button>
                 </form>
             </div>
         </Wrapper>

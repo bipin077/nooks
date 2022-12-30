@@ -70,3 +70,14 @@ module.exports.deleteBanner = async (req, res) =>
         return res.status(500).json({error : "Technical error."});
     }
 }
+
+module.exports.getAllBannersCount = async (req, res) =>
+{
+    try {
+        const count = await Banner.find({}).countDocuments();
+        return res.status(200).json({msg : "success", count});   
+    } 
+    catch (error) {
+        return res.status(500).json({error : "Technical error."});
+    }
+}

@@ -59,11 +59,20 @@ const BannerServices = createApi({
                     }
                 },
                 invalidatesTags : ['banners']
+            }),
+            countBanners : builder.query({
+                query : () =>
+                {
+                    return {
+                        url : "bannersCount",
+                        method : "GET"
+                    }
+                },
+                providesTags : ['banners']
             })
         }
-        
     }
 });
 
-export const {useGetAllBannersQuery, useAddBannerMutation, useDeleteBannerMutation, useGetSingleBannerQuery, useUpdateBannerMutation} = BannerServices;
+export const { useCountBannersQuery ,useGetAllBannersQuery, useAddBannerMutation, useDeleteBannerMutation, useGetSingleBannerQuery, useUpdateBannerMutation} = BannerServices;
 export default BannerServices;

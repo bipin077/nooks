@@ -1,16 +1,42 @@
 import React from 'react';
-
 import ClientWrapper from './ClientWrapper';
 import { Link } from 'react-router-dom';
-
 import { useGetAllProductsQuery } from "../store/Services/ProductServices";
 import {useGetAllCategoriesQuery} from "../store/Services/CategoryService";
+import {addToCart} from "../store/Reducers/CartReducer";
+import {useSelecter, useDispatch} from "react-redux";
+import {Helmet} from "react-helmet";
 
 const Shop = () => {
     const { data = [], isFetching } = useGetAllProductsQuery();
     const {data:categories=[], isFetching:categoriesAvialable} = useGetAllCategoriesQuery();
+
+    const dispatch = useDispatch();
+
+    const addToCartProduct = (product) =>
+    {
+        const productData = {
+            id : product._id,
+            category : product.category,
+            name : product.name,
+            image : product.image,
+            mrp: product.mrp,
+            price : product.price,
+            sku : product.sku,
+            quantity : 1
+        }
+        
+        dispatch(addToCart(productData));
+        console.log(productData);
+        alert("Product Added To Cart");
+    }
+
     return (
         <ClientWrapper>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Products | Nooks</title>
+            </Helmet>
             <div className="breadcrumb-group">
                 <div className="container">
                     <div className="page-header breadcrumb-wrap">
@@ -94,7 +120,7 @@ const Shop = () => {
                                                             </div>
                                                         </div>
                                                         <div className="add-feature">
-                                                            <Link to="cart.html" className="btn btn-primary"><i className="feather-shopping-bag me-1"></i>Add To Cart</Link>
+                                                            <button onClick={()=>addToCartProduct(product)} className="btn btn-primary"><i className="feather-shopping-bag me-1"></i>Add To Cart</button>
                                                         </div>
                                                     </div>
                                                 </div>

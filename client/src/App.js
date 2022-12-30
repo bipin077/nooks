@@ -27,7 +27,17 @@ import AddWhyChooseUs from './Screens/Admin/AddWhyChooseUs';
 import EditWhyChooseUs from './Screens/Admin/EditWhyChooseUs';
 import ProductDetail from './Screens/ProductDetail';
 import ShopCategory from './Screens/ShopCategory';
+import CartScreen from './Screens/CartScreen';
+import CheckoutScreen from './Screens/CheckoutScreen';
+import SearchScreen from './Screens/SearchScreen';
+import LoginScreen from './Screens/Admin/LoginScreen';
+import Login from "./Screens/Login";
+import Register from './Screens/Register';
 
+import PublicRoute from "./PublicRoutes";
+import PrivateRoute from "./PrivateRoute";
+import AllOrders from './Screens/Admin/AllOrders';
+import OrderDetail from './Screens/Admin/OrderDetail';
 
 const App = () => {
   return (
@@ -37,22 +47,30 @@ const App = () => {
           <Route path='/shop' element={<Shop />} />
           <Route path='/shop/:id' element={<ShopCategory />} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<CartScreen />} />
+          <Route path="/checkout" element={<CheckoutScreen />} />
+          <Route path="/search/:query" element={<SearchScreen />} />
+          <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+          <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
 
           <Route path='/admin'>
-              <Route path='dashboard' element={<Dashboard />} />
-              <Route path='banners' element={<AllBanners />} />
-              <Route path='addBanner' element={<AddBanners />} />
-              <Route path='editBanner/:id' element={<EditBanners />} />
-              <Route path='categories' element={<AllCategories />} />
-              <Route path='addCategory' element={<AddCategory />} />
-              <Route path='editCategory/:id' element={<EditCategory />} />
-              <Route path='products' element={<AllProducts />} />
-              <Route path='addProduct' element={<AddProduct />} />
-              <Route path='editProduct/:id' element={<EditProduct />} />
-              <Route path='whychooseus' element={<AllWhyChooseUs />} />
-              <Route path='addWhyChooseUs' element={<AddWhyChooseUs />} />
-              <Route path='editWhyChooseUs/:id' element={<EditWhyChooseUs />} />
-              <Route path='settings' element={<Settings />} />
+              <Route path='login' element={<PublicRoute><LoginScreen /></PublicRoute>} />  
+              <Route path='dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+              <Route path='banners' element={<PrivateRoute><AllBanners /></PrivateRoute>} />
+              <Route path='addBanner' element={<PrivateRoute><AddBanners /></PrivateRoute>} />
+              <Route path='editBanner/:id' element={<PrivateRoute><EditBanners /></PrivateRoute>} />
+              <Route path='categories' element={<PrivateRoute><AllCategories /></PrivateRoute>} />
+              <Route path='addCategory' element={<PrivateRoute><AddCategory /></PrivateRoute>} />
+              <Route path='editCategory/:id' element={<PrivateRoute><EditCategory /></PrivateRoute>} />
+              <Route path='products' element={<PrivateRoute><AllProducts /></PrivateRoute>} />
+              <Route path='addProduct' element={<PrivateRoute><AddProduct /></PrivateRoute>} />
+              <Route path='editProduct/:id' element={<PrivateRoute><EditProduct /></PrivateRoute>} />
+              <Route path='whychooseus' element={<PrivateRoute><AllWhyChooseUs /></PrivateRoute>} />
+              <Route path='addWhyChooseUs' element={<PrivateRoute><AddWhyChooseUs /></PrivateRoute>} />
+              <Route path='editWhyChooseUs/:id' element={<PrivateRoute><EditWhyChooseUs /></PrivateRoute>} />
+              <Route path='orders' element={<PrivateRoute><AllOrders /></PrivateRoute>} />
+              <Route path='orderDetail/:id' element={<PrivateRoute><OrderDetail /></PrivateRoute>} />
+              <Route path='settings' element={<PrivateRoute><Settings /></PrivateRoute>} />
           </Route>
         </Routes>
         

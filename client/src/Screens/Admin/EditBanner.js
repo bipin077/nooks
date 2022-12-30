@@ -76,7 +76,7 @@ const EditBanners = () => {
 
     return (
         <Wrapper>
-            <div class="container mt-3">
+            <div className="container mt-3">
                 <h2>Edit Banner</h2>
                 <Link to="/admin/banners"><button className='m-2 px-2 bg-success text-light'>All Banners</button></Link>
                 <form onSubmit={formSubmitHandler} className="mb-5">
@@ -113,7 +113,7 @@ const EditBanners = () => {
                         <label htmlFor="pwd" className="form-label">Banner Image</label>
                         <input type="file" className="form-control form-control-sm"  id="pwd" name="image" onChange={(e)=>setImage(e.target.files[0])} />
                         <p>Image dimention must be 544 × 476 px and jpg format</p>
-                        { data.banner ? <img src={ `/upload/banners/${data.banner.image}` } style={{"width" : "10%"}} class="rounded-pill"  /> : '' }
+                        { data.banner ? <img src={ `/upload/banners/${data.banner.image}` } style={{"width" : "10%"}} className="rounded-pill"  /> : '' }
                     </div>
                     <button type="submit" className="btn btn-success">Click Here To Submit</button>
                 </form>
