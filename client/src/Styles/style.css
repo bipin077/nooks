@@ -11412,8 +11412,7 @@ footer .hotline img {
     transform: translateX(-50%);
   }
   .logo.header-logo a img {
-    width: 52px;
-    min-width: 52px;
+    width: 100%;
   }
 
   .header-bottom {
@@ -12028,7 +12027,7 @@ footer .hotline img {
   .logo.header-logo {
     margin-right: 0;
     position: absolute;
-    left: 50%;
+    left: 30%;
     transform: translateX(-50%);
   }
 

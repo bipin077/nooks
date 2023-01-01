@@ -1,15 +1,19 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {removeToken} from "../../store/Reducers/AuthReducer";
 
 const Wrapper = ({ children }) => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const logout = () =>
   {
     localStorage.removeItem("token");
    
     alert("Logout Success");
+    dispatch(removeToken());
     navigate("/");
   }
   return (

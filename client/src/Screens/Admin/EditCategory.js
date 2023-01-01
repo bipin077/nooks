@@ -9,7 +9,6 @@ const EditCategory = () => {
     const {data=[], isFetching} = useGetSingleCategoryQuery(id);
 
     const [updateCategory, response] = useUpdateCategoryMutation();
-    console.log(response);
 
     const navigate = useNavigate();
 

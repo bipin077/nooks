@@ -8,7 +8,6 @@ const AllProducts = () => {
   const {data=[], isFetching} = useGetAllProductsQuery();
 
   const [removeProduct, response] = useDeleteProductMutation();
-  console.log(response);
 
   const deleteProduct = (id) =>
   {

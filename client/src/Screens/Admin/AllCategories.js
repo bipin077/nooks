@@ -9,7 +9,6 @@ const AllCategories = () => {
   const {data=[], isFetching} = useGetAllCategoriesQuery();
 
   const [removeCategory, response] = useDeleteCategoryMutation();
-  console.log(response);
 
   const deleteCategory = (id) =>
   {

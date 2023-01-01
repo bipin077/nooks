@@ -8,7 +8,6 @@ const AllBanners = () => {
   const {data=[], isFetching} = useGetAllBannersQuery();
 
   const [removeBanner, response] = useDeleteBannerMutation();
-  console.log(response);
 
   const deleteBanner = (id) =>
   {

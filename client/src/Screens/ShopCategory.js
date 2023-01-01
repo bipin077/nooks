@@ -4,14 +4,13 @@ import { Link, useParams } from 'react-router-dom';
 import { useGetProductByCategoryQuery } from "../store/Services/ProductServices";
 import {useGetAllCategoriesQuery} from "../store/Services/CategoryService";
 import {addToCart} from "../store/Reducers/CartReducer";
-import {useSelecter, useDispatch} from "react-redux";
+import {useDispatch} from "react-redux";
 import {Helmet} from "react-helmet";
 
 const Shop = () => {
 
     const {id} = useParams();
-    const { data = [], isFetching } = useGetProductByCategoryQuery(id);
-    console.log(data);
+    const { data = [] } = useGetProductByCategoryQuery(id);
     const {data:categories=[], isFetching:categoriesAvialable} = useGetAllCategoriesQuery();
 
     const dispatch = useDispatch();
@@ -30,7 +29,6 @@ const Shop = () => {
         }
         
         dispatch(addToCart(productData));
-        console.log(productData);
         alert("Product Added To Cart");
     }
 

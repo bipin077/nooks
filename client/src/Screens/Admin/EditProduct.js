@@ -12,13 +12,11 @@ const EditProduct = () => {
 
     const {id} = useParams();
     const {data:productData=[]} = useGetSingleProductQuery(id);
-    //console.log(productData);
 
     const navigate = useNavigate();
     const {data:categoryData=[], isFetching} = useGetAllCategoriesQuery();
 
     const [updateProduct, response] = useUpdateProductMutation();
-    console.log(response);
 
     const [description, setDescription] = useState('');
     const [specification, setSpecification] = useState('');

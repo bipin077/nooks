@@ -4,7 +4,8 @@ import {Helmet} from "react-helmet";
 
 import {useLoginUserMutation} from "../store/Services/AuthServices";
 import { useNavigate } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux';
+import {setToken} from "../store/Reducers/AuthReducer";
 const Login = () => {
 
     const [state, setState] = useState({
@@ -13,10 +14,10 @@ const Login = () => {
     });
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
 
     const [loginUser, response] = useLoginUserMutation();
-    console.log(response);
 
     const inputHandler = (e) =>
     {
@@ -26,7 +27,6 @@ const Login = () => {
     const submitForm = () =>
     {
         loginUser(state);
-        console.log(state);
     }
 
 
@@ -34,14 +34,8 @@ const Login = () => {
         if(response.isSuccess)
         {
             localStorage.setItem("token", response.data.token)
-            if(response.data.user.is_admin)
-            {
-                navigate("/admin/dashboard");
-            }
-            else
-            {
-                navigate("/");
-            }
+            dispatch(setToken(response.data.token));
+            navigate("/admin/dashboard");
         }
     },[response.isSuccess])
 
@@ -60,7 +54,7 @@ const Login = () => {
                                     <h5 className='text-center'>Log In</h5>
                                     <form onSubmit={(e)=>e.preventDefault()}>
                                         { response.error && response.error.data.error.map((error)=>
-                                            <div class="alert alert-danger" role="alert">
+                                            <div className="alert alert-danger" role="alert">
                                                 { error.error}
                                             </div>
                                             )}

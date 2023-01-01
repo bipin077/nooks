@@ -9,7 +9,6 @@ const AllWhyChooseUs = () => {
   const {data=[], isFetching} = useGetAllWhyChooseUsQuery();
 
   const [removeWhyChooseUs, response] = useDeleteWhyChooseUsMutation();
-  console.log(response);
 
   const deleteWhyChooseUs = (id) =>
   {

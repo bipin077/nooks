@@ -43,18 +43,18 @@ const Header = () => {
                             <div className="col-xl-4 col-lg-6">
                                 <div className="header-left">
                                     <ul>
-                                        <li><i className="feather-user"></i><Link to="/login" className="popup-toggle">Login</Link> / <Link to="/register" className="popup-toggle">Register</Link></li>
+                                        <li><i className="feather-user"></i><Link to="/login" className="popup-toggle">Login</Link></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="header-middle d-none d-lg-block">
+                <div className="header-middle">
                     <div className="container">
                         <div className="header-col">
                             <div className="logo header-logo">
-                                <Link to="/" className="d-sm-block"><img src="/upload/logo.png" alt="logo" /></Link>
+                                <Link to="/"><img src="/upload/logo.png" alt="logo" /></Link>
                             </div>
                             <div className="header-right">
                                 <div className="header-search">
@@ -66,7 +66,7 @@ const Header = () => {
                                 <div className="header-details">
                                     <div className="header-inner">
                                         <Link to="/shop">
-                                            <label className="file-uploaded ml-15 me-2">
+                                            <label className="file-uploaded ml-15 me-2 d-none d-md-block">
                                                 Explore Latest Products
                                             </label>
                                         </Link>
@@ -76,8 +76,10 @@ const Header = () => {
                                                 <span className="pro-count blue">{cartData.totalItems}</span>
                                             </Link>
                                         </div>
+                                        <div className="header-inner-icon d-block d-md-none">
+                                                <i className="fa fa-bars"></i>
+                                        </div>
                                         <div className="header-inner-icon ">
-                                            
                                             <Link to="/cart" className="me-3">
                                                 <span className="lable d-block mt-0">Cart</span>
                                                 <span className="cart-amout d-block ">${cartData.totalPrice}</span>
@@ -85,8 +87,8 @@ const Header = () => {
                                             { cartData.cart.length > 0 ?
                                             <div className="cart-dropdown-wrap">
                                                 <ul>
-                                                { cartData.cart.map((item)=>
-                                                        <li>
+                                                { cartData.cart.map((item, index)=>
+                                                        <li key={index}>
                                                             <div className="shopping-cart-img">
                                                                 <Link to="/"><img src={ `/upload/products/${item.image}` } alt="" style={{ "width" : "50px", "height" : "50px" }} /></Link>
                                                             </div>

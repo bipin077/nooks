@@ -8,7 +8,6 @@ import { useGetSingleOrderQuery } from "../../store/Services/OrdersService";
 const OrderDetail = () => {
     const {id} = useParams();
     const { data = [], isFetching } = useGetSingleOrderQuery(id);
-    console.log(data);
 
     let grandTotal = 0;
 
@@ -25,8 +24,6 @@ const OrderDetail = () => {
         }
         
     },[data?.msg])
-
-    console.log(products);
 
     return (
         <Wrapper>

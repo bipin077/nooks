@@ -9,7 +9,6 @@ const EditWhyChooseUs = () => {
     const {data=[], isFetching} = useGetSingleWhyChooseUsQuery(id);
 
     const [updateWhyChooseUs, response] = useUpdateWhyChooseUsMutation();
-    console.log(response);
 
     const navigate = useNavigate();
 

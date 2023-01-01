@@ -5,18 +5,12 @@ import { useParams, useLocation } from 'react-router-dom';
 import {useDispatch} from "react-redux";
 import { useGetSingleProductQuery } from "../store/Services/ProductServices";
 import { addToCart } from '../store/Reducers/CartReducer';
-var HTMLDecoder = require("html-decoder");
-
+import htmlToFormattedText from "html-to-formatted-text";
 
 const ProductDetail = () => {
-
-    //const [quantity, setQuantity] = useState(1);
-
     const dispatch = useDispatch();
 
     const { id } = useParams();
-    
-
     const [productData, setProductData] = useState({
         id : '',
         category : '',
@@ -48,8 +42,6 @@ const ProductDetail = () => {
 
 
     const { data = [], isFetching } = useGetSingleProductQuery(id);
-    console.log(data);
-
 
     const addToCartProduct = () =>
     {
@@ -58,11 +50,12 @@ const ProductDetail = () => {
         alert("Product Added To Cart");
     }
 
+    const desc = htmlToFormattedText();
+
     useEffect(() =>{
 
         if(!isFetching)
         {
-            
             setProductData({...productData, id : data.product._id, category : data.product.category, name : data.product.name, image : data.product.image, mrp : data.product.mrp, price : data.product.price, sku : data.product.sku});
         }
     },[data.msg])
@@ -126,7 +119,7 @@ const ProductDetail = () => {
                                                         <li>Category : <span className="text-black">{data.product.category}</span></li>
                                                     </ul>
                                                     <div>
-                                                        {data.product.specification}
+                                                    { htmlToFormattedText(data.product.specification) }
                                                     </div>
                                                     <div className="product-extra-link2 ">
                                                         <h5>Quantity</h5>
@@ -154,7 +147,7 @@ const ProductDetail = () => {
                                                         <div className="tab-pane about-items fade show active" id="Description">
                                                             <h5>Product Description</h5>
                                                             <div className="">
-                                                                {data.product.description}
+                                                                {htmlToFormattedText(data.product.description)}
                                                             </div>
                                                         </div>
                                                     </div>

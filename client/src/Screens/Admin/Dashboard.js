@@ -12,7 +12,6 @@ const Dashboard = () => {
     const {data:categoryCount = []} = useCountCategoryQuery();
     const {data:productCount = []} = useCountProductsQuery();
 
-
     return (
         <Wrapper>
             <div className='container mt-4'>

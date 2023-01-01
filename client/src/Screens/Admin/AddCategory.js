@@ -8,7 +8,6 @@ const AddCategory = () => {
 
     const navigate = useNavigate();
     const [insertCategory, response] = useAddCategoryMutation();
-    //console.log(response);
 
     const [state, setState] = useState(
         {

@@ -10,8 +10,6 @@ const EditBanners = () => {
     const {data=[], isFetching} = useGetSingleBannerQuery(id);
 
     const [updateBannerData, response] = useUpdateBannerMutation();
-    console.log(response);
-    //console.log(data);
 
     const navigate = useNavigate();
 

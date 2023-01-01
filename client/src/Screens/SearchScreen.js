@@ -28,7 +28,6 @@ const SearchScreen = () => {
         }
         
         dispatch(addToCart(productData));
-        console.log(productData);
         alert("Product Added To Cart");
     }
 
@@ -71,7 +70,7 @@ const SearchScreen = () => {
 
                                 {!isFetching && data.product.map((product, index) =>
                                     product.status ?
-                                        <div className="col-xl-3 col-md-3 col-12 col-sm-6">
+                                        <div key={index} className="col-xl-3 col-md-3 col-12 col-sm-6">
                                             <div className="product-card wow animate__animated animate__fadeIn mb-25" data-wow-delay=".1s">
                                                 <div className="product-img-col">
                                                     <div className="product-img product-img-zoom">

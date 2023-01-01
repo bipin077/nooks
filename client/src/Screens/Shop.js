@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useGetAllProductsQuery } from "../store/Services/ProductServices";
 import {useGetAllCategoriesQuery} from "../store/Services/CategoryService";
 import {addToCart} from "../store/Reducers/CartReducer";
-import {useSelecter, useDispatch} from "react-redux";
+import {useDispatch} from "react-redux";
 import {Helmet} from "react-helmet";
 
 const Shop = () => {
@@ -27,7 +27,6 @@ const Shop = () => {
         }
         
         dispatch(addToCart(productData));
-        console.log(productData);
         alert("Product Added To Cart");
     }
 
@@ -99,7 +98,7 @@ const Shop = () => {
 
                                     {!isFetching && data.product.map((product, index) =>
                                         product.status ?
-                                            <div className="col-xl-4 col-md-4 col-12 col-sm-6">
+                                            <div key={index} className="col-xl-4 col-md-4 col-12 col-sm-6">
                                                 <div className="product-card wow animate__animated animate__fadeIn mb-25" data-wow-delay=".1s">
                                                     <div className="product-img-col">
                                                         <div className="product-img product-img-zoom">

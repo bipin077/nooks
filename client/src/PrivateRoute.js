@@ -8,4 +8,4 @@ const PrivateRoute = ({children}) => {
     return token ? children : <Navigate to="/" />;
 }
 
-export default PrivateRoute
+export default PrivateRoute;

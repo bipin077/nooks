@@ -8,7 +8,6 @@ const AddWhyChooseUs = () => {
 
     const navigate = useNavigate();
     const [insertWhyChooseUs, response] = useInsertWhyChooseUsMutation();
-    // console.log(response);
 
     const [state, setState] = useState(
         {

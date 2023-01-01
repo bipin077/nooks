@@ -57,8 +57,8 @@ const Footer = () => {
                             <h4 className="footer-title">Popular Categories</h4>
                             <ul className="footer-list mb-sm-5 mb-md-0">
                             {
-                                categoryData?.category && categoryData.category.map((cat)=>
-                                    <li><Link to={ `/shop/${cat._id}` }>{cat.title}</Link></li>
+                                categoryData?.category && categoryData.category.map((cat, index)=>
+                                    <li key={index}><Link to={ `/shop/${cat._id}` }>{cat.title}</Link></li>
                                 )
                             }
                             </ul>

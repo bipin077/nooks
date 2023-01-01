@@ -14,7 +14,6 @@ const AddProduct = () => {
     const {data=[], isFetching} = useGetAllCategoriesQuery();
 
     const [insertProduct, response] = useInsertProductMutation();
-    console.log(response);
 
     const [description, setDescription] = useState('');
     const [specification, setSpecification] = useState('');

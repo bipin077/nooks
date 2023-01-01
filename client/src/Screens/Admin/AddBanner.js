@@ -8,7 +8,6 @@ const AddBanners = () => {
 
     const navigate = useNavigate();
     const [insertBanner, response] = useAddBannerMutation();
-    console.log(response);
     const [state, setState] = useState(
         {
             title_one : "",
