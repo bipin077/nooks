@@ -38,12 +38,16 @@ import PublicRoute from "./PublicRoutes";
 import PrivateRoute from "./PrivateRoute";
 import AllOrders from './Screens/Admin/AllOrders';
 import OrderDetail from './Screens/Admin/OrderDetail';
+import AboutUs from './Screens/AboutUs';
+import ContactUs from './Screens/ContactUs';
 
 const App = () => {
   return (
     <BrowserRouter>
         <Routes>
           <Route path='/' element={<HomeScreen />} />
+          <Route path='/about' element={<AboutUs />} />
+          <Route path='/contact' element={<ContactUs />} />
           <Route path='/shop' element={<Shop />} />
           <Route path='/shop/:id' element={<ShopCategory />} />
           <Route path="/product/:id" element={<ProductDetail />} />
